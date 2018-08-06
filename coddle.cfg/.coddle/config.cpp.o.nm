@@ -1,0 +1,11 @@
+0000000000000000 V DW.ref.__gxx_personality_v0
+0000000000000000 r GCC_except_table0
+                 U __gxx_personality_v0
+0000000000000000 r .L.str
+                 U _Unwind_Resume
+0000000000000000 T _Z9configureR6Config
+                 U _ZdlPv
+0000000000000000 W _ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE17_M_realloc_insertIJS5_EEEvN9__gnu_cxx17__normal_iteratorIPS5_S7_EEDpOT_
+                 U _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE9_M_createERmm
+                 U _Znwm
+                 U _ZSt17__throw_bad_allocv
