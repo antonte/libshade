@@ -29,7 +29,7 @@ public:
   ~ShaderProgram();
   void use();
 
-  // C++ boiler plate interface
+  // C++ boilerplate interface
   ShaderProgram(const ShaderProgram &) = delete;
   ShaderProgram &operator=(const ShaderProgram &) = delete;
   ShaderProgram &operator=(ShaderProgram &&other)
