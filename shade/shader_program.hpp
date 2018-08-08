@@ -46,8 +46,8 @@ private:
   GLuint programId;
   std::string vertexFileName;
   std::string fragmentFileName;
-  time_t tsVertex = 0;
-  time_t tsFragment = 0;
+  time_t tsVertex = -1;
+  time_t tsFragment = -1;
 
   void updateVars();
   GLuint loadShaders(const char *vertexFilePath, const char *fragmentFilePath);

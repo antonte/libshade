@@ -114,16 +114,16 @@ static time_t getModificationTime(const std::string &file)
   struct stat statbuf;
   int res = stat(file.c_str(), &statbuf);
   if (res != 0)
-    return 0;
+    throw std::runtime_error("file not found: " + file);
   return statbuf.st_mtime;
 }
 
 ShaderProgram::ShaderProgram(const std::string &vertex, const std::string &fragment)
   : programId(loadShaders(vertex.c_str(), fragment.c_str())),
-    vertexFileName(vertex),
+    vertexFileName(vertex + ""),
     fragmentFileName(fragment),
-    tsVertex(getModificationTime(vertex)),
-    tsFragment(getModificationTime(fragment))
+    tsVertex(getModificationTime(vertex + ".vertexshader")),
+    tsFragment(getModificationTime(fragment + ".fragmentshader"))
 {
   glUseProgram(programId);
 }
@@ -133,8 +133,8 @@ void ShaderProgram::init(const std::string &vertex, const std::string &fragment)
   programId = loadShaders(vertex.c_str(), fragment.c_str());
   vertexFileName = vertex;
   fragmentFileName = fragment;
-  tsVertex = getModificationTime(vertex);
-  tsFragment = getModificationTime(fragment);
+  tsVertex = getModificationTime(vertex + ".vertexshader");
+  tsFragment = getModificationTime(fragment + ".fragmentshader");
   glUseProgram(programId);
 }
 
@@ -147,8 +147,8 @@ ShaderProgram::~ShaderProgram()
 
 void ShaderProgram::use()
 {
-  auto tsVertexNew = getModificationTime(vertexFileName);
-  auto tsFragmentNew = getModificationTime(fragmentFileName);
+  auto tsVertexNew = getModificationTime(vertexFileName + ".vertexshader");
+  auto tsFragmentNew = getModificationTime(fragmentFileName + ".fragmentshader");
   if (tsVertexNew > tsVertex || tsFragmentNew > tsFragment)
   {
     tsVertex = tsVertexNew;
