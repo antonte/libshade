@@ -1,6 +1,6 @@
 #pragma once
 #include "array_buffer.hpp"
-#include "sdlpp.hpp"
+#include "sdlpp/sdlpp.hpp"
 #include "texture_library.hpp"
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
