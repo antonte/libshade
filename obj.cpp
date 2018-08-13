@@ -8,6 +8,8 @@ public:
   ObjData(const std::string &fileName)
   {
     std::ifstream obj("data/" + fileName + ".obj");
+    if (!obj)
+      throw std::runtime_error("file not found: data/" + fileName + ".obj");
     std::string line;
 
     std::vector<glm::vec3> tmpVertices;
