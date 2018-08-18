@@ -57,6 +57,7 @@ public:
   }
 
   operator T &() { return value; }
+  T &get() { return value; }
 
   void update() override { Internal::uniform<T>(location, value); }
 
