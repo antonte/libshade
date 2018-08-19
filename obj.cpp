@@ -92,10 +92,10 @@ public:
   std::vector<glm::vec3> normals;
 };
 
-Obj::Obj(TextureLibrary &textureLibrary,
+Obj::Obj(Library &library,
          const std::string &objFileName,
          const std::string &textureFileName)
-  : texture(textureLibrary.get(textureFileName.empty() ? objFileName : textureFileName)),
+  : texture(library.getTexture(textureFileName.empty() ? objFileName : textureFileName)),
     objData(std::make_unique<ObjData>(objFileName)),
     vertices(objData->vertices.data(), objData->vertices.size(), 0),
     uvs(objData->uvs.data(), objData->uvs.size(), 1),
