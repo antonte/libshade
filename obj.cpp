@@ -107,7 +107,7 @@ Obj::Obj(Library &library,
 
 Obj::~Obj() {}
 
-void Obj::activate()
+void Obj::draw()
 {
   vertices.activate();
   normals.activate();

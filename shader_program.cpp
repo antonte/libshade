@@ -64,7 +64,7 @@ GLuint ShaderProgram::loadShaders(const char *vertexFilePath, const char *fragme
   }
 
   // Compile Fragment Shader
-  printf("Compiling shader : %s\n", fragmentFilePath);
+  printf("Compiling shader: %s\n", fragmentFilePath);
   {
     std::string tmp = fragmentShaderCode.str();
     const char *ctmp = tmp.c_str();

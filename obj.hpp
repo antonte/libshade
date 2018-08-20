@@ -16,7 +16,7 @@ public:
   Obj(Library &library,
       const std::string &objFileName,
       const std::string &textureFileName = std::string());
-  void activate();
+  void draw();
   ~Obj();
 
 private:
