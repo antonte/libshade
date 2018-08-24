@@ -41,12 +41,11 @@ void ArrayBuffer::activate()
 {
   glBindBuffer(GL_ARRAY_BUFFER, id);
   glEnableVertexAttribArray(attribute);
-  glVertexAttribPointer(
-    attribute, // attribute. No particular reason for 1, but must match the layout in the shader.
-    cNum,      // size
-    type,  // type
-    GL_FALSE,  // normalized?
-    0,         // stride
-    (void *)0  // array buffer offset
+  glVertexAttribPointer(attribute,
+                        cNum,     // size
+                        type,     // type
+                        GL_FALSE, // normalized?
+                        0,        // stride
+                        (void *)0 // array buffer offset
   );
 }
