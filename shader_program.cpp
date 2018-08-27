@@ -171,5 +171,8 @@ void ShaderProgram::use()
 void ShaderProgram::updateVars()
 {
   for (auto &&v : vars)
+  {
     v->updateLocation(programId);
+    v->update();
+  }
 }
