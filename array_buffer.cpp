@@ -1,6 +1,6 @@
 #include "shade/array_buffer.hpp"
 
-ArrayBuffer::ArrayBuffer(const GLfloat *data, int size, int aCNum, int aAttribute) : attribute(aAttribute), cNum(aCNum), type(GL_FLOAT)
+ArrayBuffer::ArrayBuffer(const GLfloat *data, int size, int aAttribute) : attribute(aAttribute), cNum(1), type(GL_FLOAT)
 {
   glGenBuffers(1, &id);
   glBindBuffer(GL_ARRAY_BUFFER, id);
@@ -25,7 +25,7 @@ ArrayBuffer::ArrayBuffer(const glm::vec2 *data, int size, int aAttribute) :
 }
 
 
-ArrayBuffer::ArrayBuffer(const GLint *data, int size, int aCNum, int aAttribute) : attribute(aAttribute), cNum(aCNum), type(GL_INT)
+ArrayBuffer::ArrayBuffer(const GLint *data, int size, int aAttribute) : attribute(aAttribute), cNum(1), type(GL_INT)
 {
   glGenBuffers(1, &id);
   glBindBuffer(GL_ARRAY_BUFFER, id);
