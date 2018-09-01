@@ -33,6 +33,13 @@ namespace Internal
   }
 
   template <>
+  void uniform<glm::vec4>(GLint location, const glm::vec4 &value)
+  {
+    glUniform4fv(location, 1, &value[0]);
+    GL_CHECK_ERROR("set vec4 uniform value, location: ", location);
+  }
+
+  template <>
   std::string type<float>()
   {
     return "float";
@@ -48,5 +55,11 @@ namespace Internal
   std::string type<glm::mat4>()
   {
     return "mat4";
+  }
+
+  template <>
+  std::string type<glm::vec4>()
+  {
+    return "vec4";
   }
 } // namespace Internal

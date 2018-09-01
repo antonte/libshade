@@ -34,6 +34,9 @@ namespace Internal
   template <>
   void uniform<glm::mat4>(GLint location, const glm::mat4 &value);
 
+  template <>
+  void uniform<glm::vec4>(GLint location, const glm::vec4 &value);
+
   template <typename T>
   std::string type();
 
@@ -57,7 +60,9 @@ public:
   }
 
   operator T &() { return value; }
+  operator const T &() const { return value; }
   T &get() { return value; }
+  const T &get() const { return value; }
 
   void update() override { Internal::uniform<T>(location, value); }
 
