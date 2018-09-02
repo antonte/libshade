@@ -47,20 +47,27 @@ void Text::setText(const std::string &text)
   std::vector<glm::vec3> tmpVertices;
   std::vector<glm::vec2> tmpUvs;
   auto x = 0.0f;
+  auto y = 0.0f;
   for (auto ch : text)
   {
+    if (ch == '\n')
+    {
+      x = 0.0f;
+      y += 1.0f;
+      continue;
+    }
     auto idx = ch - ' ';
-    if (idx >= static_cast<int>(coords.size()))
+    if (idx >= static_cast<int>(coords.size()) || idx < 0)
       continue;
     auto &&crd = coords[idx];
     auto normWidth = 1.0f * std::get<2>(crd) / std::get<3>(crd);
-    tmpVertices.emplace_back(x, 0.0f, 0.0f);
-    tmpVertices.emplace_back(x + normWidth, 0.0f, 0.0f);
-    tmpVertices.emplace_back(x + normWidth, 1.0f, 0.0f);
+    tmpVertices.emplace_back(x, y + 0.0f, y + 0.0f);
+    tmpVertices.emplace_back(x + normWidth, y + 0.0f, y + 0.0f);
+    tmpVertices.emplace_back(x + normWidth, y + 1.0f, y + 0.0f);
 
-    tmpVertices.emplace_back(x, 0.0f, 0.0f);
-    tmpVertices.emplace_back(x + normWidth, 1.0f, 0.0f);
-    tmpVertices.emplace_back(x, 1.0f, 0.0f);
+    tmpVertices.emplace_back(x, y + 0.0f, y + 0.0f);
+    tmpVertices.emplace_back(x + normWidth, y + 1.0f, y + 0.0f);
+    tmpVertices.emplace_back(x, y + 1.0f, y + 0.0f);
     auto chX = 1.0f * std::get<0>(crd) / width;
     auto chY = 1.0f * std::get<1>(crd) / height;
     auto chW = 1.0f * std::get<2>(crd) / width;
