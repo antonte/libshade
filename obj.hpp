@@ -17,6 +17,7 @@ public:
       const std::string &objFileName,
       const std::string &textureFileName = std::string());
   void draw();
+  void drawInstanced(int instNum);
   ~Obj();
 
 private:

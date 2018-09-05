@@ -118,3 +118,15 @@ void Obj::draw()
   }
   glDrawArrays(GL_TRIANGLES, 0, n);
 }
+
+void Obj::drawInstanced(int instNum)
+{
+  vertices.activate();
+  normals.activate();
+  if (texture)
+  {
+    uvs.activate();
+    texture->glBind(nullptr, nullptr);
+  }
+  glDrawArraysInstanced(GL_TRIANGLES, 0, n, instNum);
+}
