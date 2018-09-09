@@ -9,6 +9,8 @@ class Text
 public:
   Text(Library &, const std::string &fontTexture);
   void setText(const std::string &);
+  float getWidth() const;
+  float getHeight() const;
   void draw();
 
 private:
@@ -19,4 +21,6 @@ private:
   std::vector<std::tuple<int, int, int, int>> coords;
   int width;
   int height;
+  float textWidth = 0.0f;
+  float textHeight = 0.0f;
 };

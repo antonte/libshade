@@ -48,12 +48,16 @@ void Text::setText(const std::string &text)
   std::vector<glm::vec2> tmpUvs;
   auto x = 0.0f;
   auto y = 0.0f;
+  auto z = 0.0f;
+  textWidth = 0.0f;
+  textHeight = 0.0f;
   for (auto ch : text)
   {
     if (ch == '\n')
     {
       x = 0.0f;
       y += 1.0f;
+      textHeight = std::max(textHeight, y);
       continue;
     }
     auto idx = ch - ' ';
@@ -61,13 +65,13 @@ void Text::setText(const std::string &text)
       continue;
     auto &&crd = coords[idx];
     auto normWidth = 1.0f * std::get<2>(crd) / std::get<3>(crd);
-    tmpVertices.emplace_back(x, y + 0.0f, y + 0.0f);
-    tmpVertices.emplace_back(x + normWidth, y + 0.0f, y + 0.0f);
-    tmpVertices.emplace_back(x + normWidth, y + 1.0f, y + 0.0f);
+    tmpVertices.emplace_back(x, y + 0.0f, z);
+    tmpVertices.emplace_back(x + normWidth, y + 0.0f, z);
+    tmpVertices.emplace_back(x + normWidth, y + 1.0f, z);
 
-    tmpVertices.emplace_back(x, y + 0.0f, y + 0.0f);
-    tmpVertices.emplace_back(x + normWidth, y + 1.0f, y + 0.0f);
-    tmpVertices.emplace_back(x, y + 1.0f, y + 0.0f);
+    tmpVertices.emplace_back(x, y + 0.0f, z);
+    tmpVertices.emplace_back(x + normWidth, y + 1.0f, z);
+    tmpVertices.emplace_back(x, y + 1.0f, z);
     auto chX = 1.0f * std::get<0>(crd) / width;
     auto chY = 1.0f * std::get<1>(crd) / height;
     auto chW = 1.0f * std::get<2>(crd) / width;
@@ -80,11 +84,25 @@ void Text::setText(const std::string &text)
     tmpUvs.emplace_back(chX + chW, chY + chH);
     tmpUvs.emplace_back(chX, chY + chH);
     x += normWidth - 27.0f / std::get<3>(crd);
+    textWidth = std::max(textWidth, x);
+    z += 0.001f;
   }
+  textHeight += 1.0f;
   n = tmpVertices.size();
   vertices = std::make_unique<ArrayBuffer>(tmpVertices.data(), tmpVertices.size(), 0);
   uvs = std::make_unique<ArrayBuffer>(tmpUvs.data(), tmpUvs.size(), 1);
 }
+
+float Text::getWidth() const
+{
+  return textWidth;
+}
+
+float Text::getHeight() const
+{
+  return textHeight;
+}
+
 
 void Text::draw()
 {
