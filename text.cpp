@@ -2,7 +2,7 @@
 #include "array_buffer.hpp"
 #include "gl_check_error.hpp"
 #include "library.hpp"
-#include <cpptoml/cpptoml.h>
+#include <cpptoml.h>
 #include <log/log.hpp>
 #include <vector>
 
