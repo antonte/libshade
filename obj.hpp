@@ -7,6 +7,8 @@
 #include <memory>
 #include <string>
 #include <vector>
+// workaround for recursive dependency bug
+#include <SDL.h>
 
 class ObjData;
 
