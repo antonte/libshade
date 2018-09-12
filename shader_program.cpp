@@ -2,9 +2,15 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#ifndef _WIN32
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#else
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <windows.h>
+#endif
 
 static std::string loadFile(const std::string &filename)
 {
@@ -111,11 +117,18 @@ GLuint ShaderProgram::loadShaders(const char *vertexFilePath, const char *fragme
 
 static time_t getModificationTime(const std::string &file)
 {
+#ifndef _WIN32
   struct stat statbuf;
   int res = stat(file.c_str(), &statbuf);
   if (res != 0)
     throw std::runtime_error("file not found: " + file);
   return statbuf.st_mtime;
+#else
+  struct _stat buffer;
+  if (_stat(file.c_str(), &buffer) != 0)
+    throw std::runtime_error("file not found: " + file);
+  return buffer.st_mtime;
+#endif
 }
 
 ShaderProgram::ShaderProgram(const std::string &vertex, const std::string &fragment)
